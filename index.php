@@ -1,10 +1,18 @@
 <?php
-//halaman read
+session_start();
+if(empty($_SESSION['username'])){
+    header("location:login.php");
+    exit();
+}
 include "koneksi.php";
+
+//cek level user
+$qlevel = mysqli_query($koneksi, "select * from pengguna where username='".$_SESSION['username']."'");
+$dlevel = mysqli_fetch_array($qlevel);
 ?>
 
 <h1>DAFTAR TAMU</h1>
-<a href="tambah.php">TAMBAH TAMU</a> <br> <br>
+<a href="tambah.php">TAMBAH TAMU</a> | <a href="logout.php">Log Out</a> <br><br>
 <table border=1>
     <tr>
         <td>NO</td>
@@ -15,7 +23,11 @@ include "koneksi.php";
         <td>KEPADA</td>
         <td>PESAN</td>
         <td>WAKTU</td>
-        <td>AKSI</td>
+        <?php
+            if ($dlevel ["level"] == "admin") {
+                echo "<td>AKSI</td>";
+            }
+        ?>
     </tr>
     <?php
     $query = mysqli_query($koneksi, "select * from daftar_tamu");
@@ -28,10 +40,13 @@ include "koneksi.php";
                     <td>" . $data['email'] . "</td>
                     <td>" . $data['kepada'] . "</td>
                     <td>" . $data['pesan'] . "</td>
-                    <td>" . $data['tanggal'] . "</td>
-                    <td><a href='edit.php?id=".$data['id']."'>EDIT | <a href='delete.php?id=".$data['id']."'>DELETE</td>                
-                </tr>";
+                    <td>" . $data['tanggal'] . "</td>";
+
+                    if( $dlevel['level']=='admin'){
+                        echo "<td> <a href='edit.php?id=".$data['id']."'>EDIT | <a href='delete.php?id=".$data['id']."'>DELETE</td>";                
+                        }
+                        echo "</tr>";
     $no++;
-            }
+        }       
     ?>
 </table>
