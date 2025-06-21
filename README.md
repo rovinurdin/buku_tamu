@@ -1,7 +1,9 @@
-index.php <done>
-tambah.php <done>
-tambah_actio.php <done>
-koneksi.php <done>
+index.php
+koneksi.php
+tambah.php
+tambah_actio.php
+edit.php
+edit_action.php
+delete.php
 
-lanjutkan edit.php
 db:localhost buku_tamu
