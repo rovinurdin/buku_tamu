@@ -16,6 +16,14 @@
                 <td>Nama</td>
                 <td><input type="text" name="nama" id=""></td>
             </tr>
+             <tr>
+                <td>Alamat</td>
+                <td><input type="text" name="nama" id=""></td>
+            </tr>
+             <tr>
+                <td>No Telpon</td>
+                <td><input type="text" name="nama" id=""></td>
+            </tr>
             <tr>
                 <td>E-mail</td>
                 <td><input type="email" name="email" id=""></td>
